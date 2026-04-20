@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivek Mange — Robotics Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f0;--bg2:#f2ece2;--bg3:#e8dfd2;--card:#fffdf9;
+  --border:rgba(80,50,20,0.08);--border2:rgba(80,50,20,0.15);
+  --ink:#1a1208;--ink2:#4a3c28;--ink3:#8a7860;
+  --accent:#5c6e3a;--accent-l:#e8f0d8;
+  --green:#7a5c2d;--green-l:#f0e8d6;
+  --amber:#a04020;--amber-l:#f5e0d0;
+  --purple:#3e6a8a;--purple-l:#dceaf5;
+  --serif:'Cormorant Garamond',serif;
+  --body:'Jost',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,246,240,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 3rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--ink);text-decoration:none;font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--ink3);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cv{background:var(--accent);color:#fff!important;padding:0.35rem 1rem;font-size:11px!important;letter-spacing:0.08em!important}
+
+#hero{min-height:100vh;max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:center;padding-top:58px}
+.hero-left{padding-right:4rem;padding-top:4rem;padding-bottom:4rem}
+.hero-divider{background:var(--border2);width:1px;height:60%}
+.hero-right{padding-left:4rem;padding-top:4rem;padding-bottom:4rem}
+h1{font-family:var(--serif);font-size:clamp(3rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-0.02em;margin-bottom:0.5rem;opacity:0;animation:up 0.5s 0.15s forwards}
+.hero-name-sub{font-family:var(--serif);font-size:clamp(1.3rem,2vw,2rem);font-weight:400;font-style:italic;color:var(--ink3);margin-bottom:2rem;opacity:0;animation:up 0.5s 0.3s forwards}
+.hero-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:2rem;opacity:0;animation:up 0.5s 0.4s forwards}
+.htag{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;padding:0.25rem 0.6rem;border:1px solid var(--border2);color:var(--ink3)}
+.htag.a{border-color:rgba(92,110,58,0.4);color:var(--accent);background:var(--accent-l)}
+.htag.g{border-color:rgba(122,92,45,0.4);color:var(--green);background:var(--green-l)}
+.htag.p{border-color:rgba(62,106,138,0.4);color:var(--purple);background:var(--purple-l)}
+.hero-btns{display:flex;gap:0.75rem;opacity:0;animation:up 0.5s 0.5s forwards}
+.btn-a{background:var(--accent);color:#fff;padding:0.65rem 1.75rem;font-size:12px;font-weight:500;letter-spacing:0.04em;text-decoration:none;display:inline-block;transition:opacity 0.2s}
+.btn-a:hover{opacity:0.85}
+.btn-o{border:1px solid var(--border2);color:var(--ink2);padding:0.65rem 1.75rem;font-size:12px;font-weight:500;text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s}
+.btn-o:hover{border-color:var(--accent);color:var(--accent)}
+.hero-intro{font-family:var(--serif);font-size:1.35rem;line-height:1.9;color:var(--ink2);margin-bottom:2rem;font-style:italic;opacity:0;animation:up 0.5s 0.25s forwards}
+.hero-intro strong{font-style:normal;color:var(--ink)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);opacity:0;animation:up 0.5s 0.45s forwards}
+.hs{background:var(--card);padding:1.25rem 1.5rem}
+.hs-n{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--accent);line-height:1}
+.hs-l{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-top:0.2rem}
+
+.wrap{max-width:1200px;margin:0 auto;padding:5rem 3rem}
+.sec-head{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border2)}
+.sec-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)}
+h2{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;color:var(--ink)}
+.sec-head-rule{flex:1;height:1px;background:var(--border)}
+
+#experience{background:var(--bg);border-top:1px solid var(--border)}
+.exp-stack{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.exp-card{background:var(--card);border-left:3px solid transparent;transition:border-color 0.2s}
+.exp-card.open{border-left-color:var(--accent)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;padding:1.75rem 2.25rem;cursor:pointer;user-select:none}
+.exp-header:hover .exp-org{color:var(--accent)}
+.exp-org{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:0.1rem;transition:color 0.2s}
+.exp-role{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)}
+.exp-meta{display:flex;align-items:flex-start;gap:1.5rem;flex-shrink:0}
+.exp-toggle{font-size:1.2rem;color:var(--ink3);transition:transform 0.3s;flex-shrink:0;line-height:1;padding-top:0.2rem}
+.exp-card.open .exp-toggle{transform:rotate(45deg);color:var(--accent)}
+.exp-body{display:none;padding:0 2.25rem 1.75rem;border-top:1px solid var(--border)}
+.exp-card.open .exp-body{display:block;padding-top:1.5rem}
+.exp-body p{color:var(--ink2);line-height:1.9;margin-bottom:1rem;font-size:16px;text-align: justify}
+.exp-body p:last-of-type{margin-bottom:0.5rem}
+.exp-body p strong{color:var(--ink);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:1.25rem}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;padding:0.2rem 0.55rem;border:1px solid var(--border2);color:var(--ink3);background:var(--bg2)}
+.chip.a{background:var(--accent-l);border-color:rgba(92,110,58,0.3);color:var(--accent)}
+.chip.g{background:var(--green-l);border-color:rgba(122,92,45,0.3);color:var(--green)}
+.chip.p{background:var(--purple-l);border-color:rgba(62,106,138,0.3);color:var(--purple)}
+.chip.o{background:var(--amber-l);border-color:rgba(160,64,32,0.3);color:var(--amber)}
+.img-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:1.25rem}
+.img-box{aspect-ratio:4/3;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color 0.2s;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)}
+.img-box:hover{border-color:var(--accent)}
+.img-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.img-box video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+.yt-link{
+  padding:0.75rem 1rem;
+  height:auto;
+  display:inline-block;
+  background:var(--bg2);
+}
+
+.yt-link a{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:500;
+}
+
+.yt-icon{
+  color:#FF0000;
+  font-size:18px;
+}
+.vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-top:1.25rem;background:var(--bg2);border:1px solid var(--border);max-width:500px;}
+.vid-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+#publications{background:var(--bg2);border-top:1px solid var(--border)}
+.pub-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.pub-item{background:var(--card);padding:1.5rem 2rem;display:grid;grid-template-columns:52px 1fr;gap:2rem;transition:background 0.2s}
+.pub-item:hover{background:#fff}
+.pub-yr{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;padding-top:0.25rem}
+.pub-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:0.25rem}
+.pub-venue{font-family:var(--mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);margin-bottom:0.35rem}
+.pub-authors{font-size:15px;color:var(--ink3);margin-bottom:0.6rem}
+.pub-authors strong{color:var(--ink2);font-weight:500}
+.pub-link{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(92,110,58,0.3)}
+.pub-link:hover{border-color:var(--accent)}
+
+#personal{background:var(--bg);border-top:1px solid var(--border)}
+.personal-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.personal-text p{color:var(--ink2);line-height:1.9;margin-bottom:1rem;font-size:16px}
+.personal-text strong{color:var(--ink)}
+.personal-icons{display:flex;gap:1.5rem;font-size:2rem;margin:1.5rem 0 0.25rem}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.photo-box{aspect-ratio:1;background:var(--bg2);border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color 0.2s;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)}
+.photo-box:hover{border-color:var(--accent)}
+.photo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+.f1-poll{background:var(--card);border:1px solid var(--border);padding:1.75rem;margin-top:1.75rem}
+.f1-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:0.2rem}
+.f1-sub{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:1.25rem}
+.f1-opt{display:flex;align-items:center;gap:0.75rem;cursor:pointer;padding:0.65rem 0.9rem;background:var(--bg2);border:1px solid transparent;margin-bottom:4px;transition:border-color 0.2s;position:relative;overflow:hidden}
+.f1-opt:hover{border-color:var(--border2)}
+.f1-opt.sel{border-color:var(--accent)}
+.f1-bar-bg{position:absolute;inset:0;pointer-events:none}
+.f1-bar{height:100%;background:rgba(92,110,58,0.08);transition:width 0.5s}
+.f1-radio{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0;transition:border-color 0.2s}
+.f1-opt.sel .f1-radio{border-color:var(--accent)}
+.f1-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform 0.2s}
+.f1-opt.sel .f1-dot{transform:scale(1)}
+.f1-name{font-size:15px;color:var(--ink2);font-weight:500;flex:1;z-index:1}
+.f1-team{font-family:var(--mono);font-size:12px;color:var(--ink3);z-index:1}
+.f1-pct{font-family:var(--mono);font-size:12px;color:var(--ink3);z-index:1;min-width:2.5rem;text-align:right}
+.f1-total{font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:var(--ink3);margin-top:0.75rem;text-align:right}
+
+#contact{background:var(--bg2);border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-hl{font-family:var(--serif);font-size:clamp(2rem,3vw,3rem);font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:1rem}
+.contact-hl em{font-style:italic;color:var(--accent)}
+.contact-body{color:var(--ink2);font-size:14px;line-height:1.85}
+.c-links{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.c-link{background:var(--card);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background 0.2s;color:var(--ink)}
+.c-link:hover{background:#fff}
+.c-lbl{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.1rem}
+.c-val{font-size:13px;font-weight:500}
+.c-arr{color:var(--accent);font-size:1rem}
+
+footer{background:var(--ink);padding:1.5rem 3rem;display:flex;justify-content:space-between}
+footer span{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:0.08em}
+
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.5s,transform 0.5s}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding:5rem 1.5rem 3rem}.hero-divider{display:none}
+  .hero-left,.hero-right{padding:1.5rem 0}.wrap{padding:4rem 1.5rem}
+  .personal-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  nav{padding:0 1.5rem}footer{padding:1.5rem;flex-direction:column;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="#hero" class="nav-logo">Vivek Mange</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#personal">Personal</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="resume.pdf" target="_blank" class="nav-cv">Resume ↓</a></li>
+  </ul>
+</div></nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <h1>Vivek Mange</h1>
+    <div class="hero-name-sub">Building machines that act..</div>
+    <div class="hero-tags">
+      <span class="htag a">ROS2</span>
+      <span class="htag a">SLAM</span>
+      <span class="htag a">C++ / Python</span>
+      <span class="htag a">State Estimation</span>
+      <span class="htag g">Field Robotics</span>
+      <span class="htag g">Marine Robotics</span>
+      <span class="htag g">Mobile Robots</span>
+      <span class="htag p">AI / ML</span>
+      <span class="htag p">Autonomy</span>
+      <span class="htag p">Arm Manipulation</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#experience" class="btn-a">View Work</a>
+      <a href="resume.pdf" target="_blank" class="btn-o">Resume</a>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-right">
+    <p class="hero-intro">I'm a robotics engineer who has sent robots into <strong>restaurants and hotels to serve food</strong>, into <strong>hospitals for UV disinfection</strong>, underwater to survey oyster reefs in <strong>Barbados</strong>, onto beaches for <strong>autonomous surveillance</strong>, and into outdoor disaster fields where <strong>legged rescue robots</strong> locate and assess casualties in MASCAL scenarios. I've programmed <strong>7-DOF industrial arms</strong> for sub-millimetre precision, built custom multi-modal sensor payloads, and run <strong>VLMs and ML models on edge hardware</strong> to understand what a robot sees. <strong>My work lives at the intersection of perception, autonomy, and real-world deployment.</strong></p>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">4+</div><div class="hs-l">Years Experience</div></div>
+      <div class="hs"><div class="hs-n">5</div><div class="hs-l">Robot Platforms</div></div>
+      <div class="hs"><div class="hs-n">3</div><div class="hs-l">Publications</div></div>
+      <div class="hs"><div class="hs-n">3</div><div class="hs-l">Countries</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-label">02</span><h2>Experience</h2><div class="sec-head-rule"></div></div>
+  <div class="exp-stack reveal">
+
+    <!-- UMD DARPA -->
+    <div class="exp-card open">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">University of Maryland — DARPA Triage Challenge</div>
+          <div class="exp-role">Robotics Engineer</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-toggle">+</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <p>Working on the autonomy stack for a <strong>legged robot</strong> deployed in MASCAL (Mass Casualty) scenarios — outdoor, unstructured environments where the robot must autonomously navigate, detect, approach, and assess injured casualties without any human intervention during a run. The platform carries a custom-built multi-modal sensor payload including <strong>RGB-D, thermal, Time-of-Flight, and radar</strong> sensors, all integrated and calibrated to feed both classical and learning-based perception pipelines.</p>
+        <p>My work on perception and autonomy covers the full detection pipeline: I develop and test <strong>ML models for person detection</strong> operating across RGB, thermal, and intensity data modalities, enabling the robot to reliably localize casualties in diverse lighting and weather conditions. Detected casualties are projected into the world frame for spatial localization. On top of detection, I run <strong>Vision-Language Models (VLMs) on edge hardware</strong> on the robot, combining visual data and contextual text to make automated assessments of injury patterns — estimating injury type and severity directly on-platform in the field. I also worked on a <strong>custom team-built drone</strong>, integrating GStreamer video streams and testing thermal person detection models for aerial support in the same scenarios.</p>
+        <p>I built a <strong>Qt-based operator GUI</strong> for situational awareness during mission runs. The interface displays live casualty locations on a map, thumbnail images and injury pattern summaries from each detected casualty, robot status indicators, and live trajectory visualizations. I also integrated an <strong>ATAK-based tablet application</strong> to push this information directly to medics in the field, giving first responders real-time situational awareness of casualty locations and assessed injury states before they reach the scene.</p>
+        <div class="chips">
+          <span class="chip a">ROS2</span><span class="chip a">C++</span><span class="chip a">Python</span><span class="chip a">Docker</span>
+          <span class="chip g">Legged Robot</span><span class="chip g">RGB-D / Thermal / ToF / Radar</span><span class="chip g">Custom Drone</span>
+          <span class="chip p">VLM / AI on Edge</span><span class="chip p">Person Detection</span><span class="chip p">Qt GUI</span><span class="chip p">ATAK</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/dtc1.jpg" alt=""></div>
+          <div class="img-box"><img src="images/dtc2.jpg" alt=""></div>
+          <div class="img-box"><img src="images/dtc3.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aqua2 -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">University of Delaware — Aqua2 Marine Robotics</div>
+          <div class="exp-role">Graduate Research Engineer</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>Worked on the <strong>Aqua2 autonomous underwater vehicle</strong> — a six-flipper AUV developed by Independent Robotics, designed for marine research in challenging open-water environments. Developed a <strong>nonlinear trajectory planner</strong> for the platform, validated first in a Unity-based simulation environment before field deployment. Testing was conducted in controlled pools at the Lewis Campus in Delaware and extended to a freshwater lake in <strong>Barbados</strong> for real-world open-water trials.</p>
+        <p>On the state estimation side, I performed <strong>IMU and camera calibration using Kalibr</strong> and tested and validated <strong>OpenVINS visual-inertial odometry</strong> on the AUV, evaluating the accuracy and robustness of the VIO pipeline in underwater conditions. For the perception side of the project, I built a <strong>YOLOv10-based oyster detection pipeline</strong>, addressing the challenge of limited underwater training data by generating synthetic augmentation data using stable diffusion. The final model achieved <strong>0.657 mAP@50</strong> running on the AUV's edge hardware. This work resulted in two co-authored publications.</p>
+        <div class="chips">
+          <span class="chip a">ROS2</span><span class="chip a">OpenVINS</span><span class="chip a">Kalibr</span><span class="chip a">Python</span>
+          <span class="chip g">Aqua2 AUV</span><span class="chip g">VIO / State Estimation</span><span class="chip g">YOLOv10</span>
+          <span class="chip p">2× Publications</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/aqua1.jpg" alt=""></div>
+          <div class="img-box"><video controls> <source src="videos/aqua_v1.mp4" type="video/mp4"> </video></div>
+          <div class="img-box"><img src="images/aqua2.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KUKA -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">University of Delaware — KUKA LBR iiwa Manipulation</div>
+          <div class="exp-role">Graduate Project — 7-DOF Arm</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>Designed and implemented a sub-millimetre pick-and-place system on the <strong>KUKA LBR iiwa 7-DOF collaborative arm</strong>. A camera detects ArUco markers in the scene and uses OpenCV's solvePnP to compute full <strong>6-DOF pose estimation</strong> of target objects. From there, I derived the robot's <strong>Forward Kinematics (FK) and Inverse Kinematics (IK)</strong> analytically and implemented <strong>Jacobian pseudoinverse</strong> for redundancy resolution, with singularity detection and joint-limit enforcement to ensure safe, stable execution.</p>
+        <p>Trajectory planning was done in <strong>MATLAB</strong>, where I experimented with and compared multiple trajectory profiles — trapezoidal velocity profiles, polynomial (cubic and quintic) trajectories — evaluating the smoothness, torque requirements, and execution accuracy of each. The final trajectories were executed via <strong>C++ on the physical hardware</strong>, closing the loop between simulation and real robot. The system achieved consistent sub-millimetre placement accuracy across repeated pick-and-place cycles.</p>
+        <div class="chips">
+          <span class="chip a">C++</span><span class="chip a">MATLAB</span><span class="chip a">OpenCV</span>
+          <span class="chip g">KUKA LBR iiwa</span><span class="chip g">FK / IK</span><span class="chip g">Jacobian</span><span class="chip g">ArUco</span><span class="chip g">Trajectory Planning</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/kuka1.jpg" alt=""></div>
+          <div class="img-box"><img src="images/kuka2.jpg" alt=""></div>
+          <div class="img-box"><img src="images/kuka3.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create 3 -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">University of Delaware — iRobot Create 3 Navigation</div>
+          <div class="exp-role">Graduate Project — Mobile Robot</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>Built a complete navigation and perception stack on the <strong>iRobot Create 3</strong> platform with a custom sensor payload — an <strong>Intel RealSense depth camera</strong> and a <strong>2D LiDAR</strong> mounted on the robot. In ROS2, I developed behaviours for reactive navigation: <strong>wall following</strong> using LiDAR range data, <strong>obstacle detection and avoidance</strong> using both LiDAR and depth sensing, and <strong>object detection</strong> using OpenCV colour segmentation on the RGB stream. Each capability was tested and iterated in real hardware runs on the lab floor.</p>
+        <p>The course capstone was a <strong>minesweeper challenge</strong>: navigate a cluttered environment, detect and drive to two sequential <strong>green target balls</strong> in order, while actively avoiding a <strong>blue obstacle</strong> that must not be hit. I solved this using OpenCV-based colour detection to identify and classify targets in the camera frame, LiDAR-informed path planning in ROS2 to approach targets while clearing the obstacle, and a finite state machine to manage the task sequencing — search, approach target 1, confirm, search and approach target 2 — across the full run. The robot completed the challenge autonomously with no human input.</p>
+        <div class="chips">
+          <span class="chip a">ROS2</span><span class="chip a">Python</span><span class="chip a">OpenCV</span>
+          <span class="chip g">iRobot Create 3</span><span class="chip g">RealSense</span><span class="chip g">LiDAR</span><span class="chip g">Path Planning</span><span class="chip g">FSM</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/create1.jpg" alt=""></div>
+          <div class="img-box"><video controls> <source src="videos/create_v1.mp4" type="video/mp4"> </video></div>
+          <div class="img-box"><!-- <img src="images/create2.jpg" alt=""> -->Add Image</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Swift -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">Swift Robotics</div>
+          <div class="exp-role">Robotics Engineer</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>Swift Robotics builds and deploys autonomous service robots for hospitality and healthcare — serving food and beverages in <strong>restaurants, hotels, and cafes</strong>, and performing <strong>UV disinfection rounds in hospitals</strong>. The robots operate in semi-structured indoor environments alongside humans, requiring robust navigation, reliable localisation, and smooth human-aware motion. I joined as a robotics engineer and took ownership of the software architecture and algorithm selection for the platform.</p>
+        <p>My core work focused on the <strong>SLAM and navigation stack</strong>. I benchmarked <strong>Cartographer against RTAB-Map</strong> across a range of indoor environments — cafes, hotel corridors, hospital wards — evaluating map quality, loop closure reliability, and computational overhead on the robot's onboard hardware. I evaluated multiple motion planners for performance in tight, crowded spaces. Based on these results I drove hardware and sensor upgrades to improve localisation stability and navigation consistency in real-world deployments. I was directly involved in <strong>testing the robot in live deployment environments</strong> — restaurants during service, and hospital floors — iterating on behaviours to handle dynamic obstacles, narrow passages, and unpredictable human traffic.</p>
+        <div class="chips">
+          <span class="chip a">ROS</span><span class="chip a">Cartographer</span><span class="chip a">RTAB-Map</span>
+          <span class="chip g">Service Robot</span><span class="chip g">SLAM</span><span class="chip g">Autonomy</span><span class="chip g">Indoor Navigation</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/swift1.jpg" alt=""></div>
+          <div class="img-box"><video controls> <source src="videos/swift_v1.mp4" type="video/mp4"> </video></div>
+          <div class="img-box"><img src="images/swift2.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drishti -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">Drishti Works</div>
+          <div class="exp-role">Robotics Engineer</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>Drishti Works developed autonomous mobile robots for outdoor surveillance, with a primary application in <strong>beach and coastal monitoring</strong>. The robots were built to patrol defined routes, detect anomalies, and relay data to operators — operating continuously in challenging outdoor conditions. I was part of the team building these robots from the ground up, with full hardware-software integration responsibility.</p>
+        <p>On the hardware side, I led <strong>sensor selection and integration</strong> — choosing and integrating <strong>LiDAR, Intel RealSense, and ZED stereo cameras</strong> for perception and navigation. Low-level hardware communication was handled through <strong>I2C and UART protocols</strong>. I designed and tuned the robot's <strong>PID controller</strong> for precise velocity and heading control. In parallel, I built <strong>Gazebo simulation environments</strong> complete with synthetic noise models — damping, friction, sensor noise — to enable meaningful sim-to-real testing before field deployment.</p>
+        <p>I developed a <strong>diagnostic framework</strong> that monitored sensor health and system state in the field, significantly reducing debugging time and unplanned downtime during outdoor deployments. The robots were updated remotely through an <strong>AWS-based OTA fleet update pipeline</strong>, allowing software pushes without physically accessing each unit. Real-world testing on beach terrain in varying weather conditions was a significant part of my work — iterating on controller tuning, sensor configurations, and navigation parameters based on actual field performance.</p>
+        <div class="chips">
+          <span class="chip a">ROS2</span><span class="chip a">Gazebo</span><span class="chip a">Python</span><span class="chip a">AWS</span>
+          <span class="chip g">Mobile Robots</span><span class="chip g">LiDAR / RealSense / ZED</span><span class="chip g">PID</span><span class="chip g">Outdoor Navigation</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/drishti1.jpg" alt=""></div>
+          <div class="img-box"><img src="images/drishti2.jpg" alt=""></div>
+          <div class="img-box"><img src="images/drishti3.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TMRT -->
+    <div class="exp-card">
+      <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+        <div>
+          <div class="exp-org">TMRT — The Marine Robotics Team</div>
+          <div class="exp-role">Team Captain → AUV Engineer</div>
+        </div>
+        <div class="exp-meta"><div class="exp-toggle">+</div></div>
+      </div>
+      <div class="exp-body">
+        <p>TMRT is a student-led team that designs, builds, and competes with <strong>autonomous underwater vehicles (AUVs)</strong> in international competitions. The flagship event is the <strong>Singapore AUV Challenge</strong>, where teams deploy fully autonomous underwater robots to complete a timed mission — gate navigation, acoustics-based localisation, vision-based tasks — without any human input once submerged. In 2018 and 2019, TMRT competed and <strong>finished in the top 30 teams globally</strong>, placing us among the best university AUV teams in the world. I also represented this work as a <strong>TEDx speaker</strong>.</p>
+        <p>My journey on the team began in the marketing and outreach role — building the team's public presence and managing sponsorships — before transitioning into the technical side and eventually being elected <strong>Team Captain for two consecutive years</strong>. As captain, I managed a cross-functional team of 15+ members across mechanical, electronics, and software — running sprint planning, coordinating between hardware and software timelines, and driving integration testing in the lead-up to competition. On the technical side, I built the robot's <strong>custom PID controller</strong> for depth hold and heading control, worked on <strong>ROS and Gazebo simulation</strong> infrastructure for algorithm testing, and integrated the <strong>Pixhawk flight controller with ArduSub</strong> for low-level motor control. The sensor stack included <strong>pressure sensors for depth estimation</strong> and <strong>IMU magnetometer fusion for orientation and heading</strong>, giving the AUV full state estimation underwater. Compute ran on <strong>Jetson and Odroid</strong> boards depending on the generation of the platform.</p>
+        <div class="chips">
+          <span class="chip a">ROS</span><span class="chip a">Gazebo</span><span class="chip a">Python</span><span class="chip a">ArduSub</span>
+          <span class="chip g">AUV</span><span class="chip g">Sensor Fusion</span><span class="chip g">Jetson / Odroid</span><span class="chip g">PID</span>
+          <span class="chip p">Team Captain</span><span class="chip p">Top 30 Globally</span><span class="chip p">TEDx</span>
+        </div>
+        <div class="img-row">
+          <div class="img-box"><img src="images/tmrt1.jpg" alt=""></div>
+          <div class="img-box"><video controls> <source src="videos/tmrt_v1.mp4" type="video/mp4"> </video></div>
+          <div class="img-box"><img src="images/tmrt2.jpg" alt=""></div>
+        </div>
+	<div class="yt-link">
+	  <a href="https://www.youtube.com/watch?v=cQpwvMGWtrI" target="_blank">
+	<span class="yt-icon">📺</span>
+	    Watch on YouTube
+	  </a>
+	</div>
+
+        <!-- <div class="vid-wrap">
+          <iframe src="https://www.youtube.com/embed/cQpwvMGWtrI" allowfullscreen title="TEDx — Vivek Mange"></iframe>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<section id="publications"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-label">03</span><h2>Publications</h2><div class="sec-head-rule"></div></div>
+  <div class="pub-list reveal">
+    <div class="pub-item">
+      <div class="pub-yr">2025</div>
+      <div>
+        <div class="pub-title">Is AI currently capable of identifying wild oysters? A comparison of human annotators against ODYSSEE</div>
+        <div class="pub-venue">arXiv:2505.03108</div>
+        <div class="pub-authors">Campbell B., Williams A., Baxevani K., ..., <strong>Mange V.</strong>, ..., Tanner H.G.</div>
+        <a href="https://arxiv.org/pdf/2505.03108" target="_blank" class="pub-link">View Paper →</a>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-yr">2024</div>
+      <div>
+        <div class="pub-title">ODYSSEE: Oyster Detection Yielded by Sensor Systems on Edge Electronics</div>
+        <div class="pub-venue">ICRA 2024 — IEEE International Conference on Robotics and Automation</div>
+        <div class="pub-authors">Lin X.*, <strong>Mange V.*</strong>, Suresh A.*, Neuberger B., et al.</div>
+        <a href="https://arxiv.org/pdf/2409.07003" target="_blank" class="pub-link">View Paper →</a>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-yr">2019</div>
+      <div>
+        <div class="pub-title">Autonomous Underwater Vehicle: Electronics and Software Implementation of the Proton AUV</div>
+        <div class="pub-venue">IRJET Vol. 6, Issue 6</div>
+        <div class="pub-authors"><strong>Mange V.</strong>, Shah P., Kothari V.</div>
+        <a href="https://www.irjet.net/archives/V6/i6/IRJET-V6I6689.pdf" target="_blank" class="pub-link">View Paper →</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="personal"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-label">04</span><h2>Beyond the Lab</h2><div class="sec-head-rule"></div></div>
+  <div class="personal-grid reveal">
+    <div>
+      <div class="personal-text">
+        <p>Outside of robots, I'm genuinely obsessed with two things: <strong>cricket</strong> and <strong>Formula 1</strong>. I play cricket seriously — competitive matches, not just the casual stuff. And F1 is almost a second career's worth of interest — I follow the engineering side as much as the racing: tyre strategy, aerodynamic regs, pit wall decisions, the data. Honestly, it's not that different from robotics.</p>
+        <p>I've also had the chance to do things most engineers don't get to — giving a <strong>TEDx talk</strong> on underwater autonomy, and presenting my robotics work in front of the <strong>Prime Minister of India</strong>. Both were terrifying and brilliant in equal measure.</p>
+        <p>Feel free to browse the photos below — cricket, lab, travel, wherever life takes you outside the terminal.</p>
+      </div>
+      <div class="personal-icons">
+        <span title="Cricket">🏏</span>
+        <span title="Formula 1">🏎️</span>
+        <span title="TEDx Speaker">🎤</span>
+        <span title="Underwater Robotics">🤿</span>
+        <span title="Travel">✈️</span>
+      </div>
+      <div class="f1-poll">
+        <div class="f1-title">2026 F1 World Championship — who takes it?</div>
+        <div class="f1-sub">Cast your vote</div>
+        <div id="f1opts">
+          <div class="f1-opt" onclick="vote(0)"><div class="f1-bar-bg"><div class="f1-bar" id="b0" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d0"></div></div><div class="f1-name">Max Verstappen</div><div class="f1-team">Red Bull</div><div class="f1-pct" id="p0"></div></div>
+          <div class="f1-opt" onclick="vote(1)"><div class="f1-bar-bg"><div class="f1-bar" id="b1" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d1"></div></div><div class="f1-name">George Russell</div><div class="f1-team">Mercedes</div><div class="f1-pct" id="p1"></div></div>
+          <div class="f1-opt" onclick="vote(2)"><div class="f1-bar-bg"><div class="f1-bar" id="b2" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d2"></div></div><div class="f1-name">Lewis Hamilton</div><div class="f1-team">Ferrari</div><div class="f1-pct" id="p2"></div></div>
+          <div class="f1-opt" onclick="vote(3)"><div class="f1-bar-bg"><div class="f1-bar" id="b3" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d3"></div></div><div class="f1-name">Charles Leclerc</div><div class="f1-team">Ferrari</div><div class="f1-pct" id="p3"></div></div>
+          <div class="f1-opt" onclick="vote(4)"><div class="f1-bar-bg"><div class="f1-bar" id="b4" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d4"></div></div><div class="f1-name">Kimi Antonelli</div><div class="f1-team">Mercedes</div><div class="f1-pct" id="p4"></div></div>
+        </div>
+        <div class="f1-total" id="ftotal"></div>
+      </div>
+    </div>
+    <div>
+      <div class="photo-grid">
+        <div class="photo-box"><img src="images/personal/p1.jpg"></div>
+        <div class="photo-box"><img src="images/personal/p2.jpg"></div>
+        <div class="img-box"><video controls> <source src="videos/personal/p_v1.mp4" type="video/mp4"> </video></div>
+        <div class="photo-box"><img src="images/personal/p3.jpg"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-label">05</span><h2>Contact</h2><div class="sec-head-rule"></div></div>
+  <div class="contact-grid reveal">
+    <div>
+      <div class="contact-hl">Let's build<br>something <em>real.</em></div>
+      <p class="contact-body">Open to full-time robotics roles — perception, autonomy, field systems. Happy to talk about projects, robots, or F1 strategy.</p>
+    </div>
+    <div class="c-links">
+      <a href="mailto:vmange@umd.edu" class="c-link"><div><div class="c-lbl">Email</div><div class="c-val">vmange@umd.edu</div></div><div class="c-arr">→</div></a>
+      <a href="https://linkedin.com/in/vivek-mange" target="_blank" class="c-link"><div><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/vivek-mange</div></div><div class="c-arr">→</div></a>
+      <a href="https://github.com/VivekMangeUD" target="_blank" class="c-link"><div><div class="c-lbl">GitHub</div><div class="c-val">github.com/VivekMangeUD</div></div><div class="c-arr">→</div></a>
+      <a href="resume.pdf" target="_blank" class="c-link"><div><div class="c-lbl">Resume</div><div class="c-val">Download PDF</div></div><div class="c-arr">↓</div></a>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <span>© 2026 Vivek Mange</span>
+  <span></span>
+</footer>
+
+<script>
+function toggleExp(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.exp-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const K = 'f1v4';
+function ld() { try { return JSON.parse(localStorage.getItem(K)) || { c: [0,0,0,0,0], v: null }; } catch { return { c: [0,0,0,0,0], v: null }; } }
+function sv(d) { try { localStorage.setItem(K, JSON.stringify(d)); } catch {} }
+function rn(d) {
+  const t = d.c.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < 5; i++) {
+    const pct = t > 0 ? Math.round(d.c[i] / t * 100) : 0;
+    document.getElementById('b' + i).style.width = pct + '%';
+    document.getElementById('p' + i).textContent = t > 0 ? pct + '%' : '';
+    document.querySelectorAll('.f1-opt')[i].classList.toggle('sel', d.v === i);
+  }
+  document.getElementById('ftotal').textContent = t > 0 ? t + ' vote' + (t !== 1 ? 's' : '') + ' cast' : '';
+}
+function vote(i) { const d = ld(); if (d.v !== null) return; d.c[i]++; d.v = i; sv(d); rn(d); }
+rn(ld());
+</script>
+</body>
+</html>
