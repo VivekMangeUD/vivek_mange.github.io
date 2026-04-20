@@ -320,7 +320,7 @@ footer span{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.35);
         <div class="img-row">
           <div class="img-box"><img src="images/create1.jpg" alt=""></div>
           <div class="img-box"><video controls> <source src="videos/create_v1.mp4" type="video/mp4"> </video></div>
-          <div class="img-box"><!-- <img src="images/create2.jpg" alt=""> -->Add Image</div>
+          <div class="img-box"><img src="images/create3.jpg" alt=""></div>
         </div>
       </div>
     </div>
@@ -471,7 +471,6 @@ footer span{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.35);
           <div class="f1-opt" onclick="vote(3)"><div class="f1-bar-bg"><div class="f1-bar" id="b3" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d3"></div></div><div class="f1-name">Charles Leclerc</div><div class="f1-team">Ferrari</div><div class="f1-pct" id="p3"></div></div>
           <div class="f1-opt" onclick="vote(4)"><div class="f1-bar-bg"><div class="f1-bar" id="b4" style="width:0%"></div></div><div class="f1-radio"><div class="f1-dot" id="d4"></div></div><div class="f1-name">Kimi Antonelli</div><div class="f1-team">Mercedes</div><div class="f1-pct" id="p4"></div></div>
         </div>
-        <div class="f1-total" id="ftotal"></div>
       </div>
     </div>
     <div>
@@ -516,21 +515,41 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+// Baseline counts — seeded to reflect realistic community sentiment.
+// When a visitor votes, their choice is added on top of these numbers locally.
+// Percentages always show; no vote count is ever displayed.
+const F1_BASE = [790, 200, 40, 60, 80]; // Max, George, Lewis, Charles, Kimi
 const K = 'f1v4';
-function ld() { try { return JSON.parse(localStorage.getItem(K)) || { c: [0,0,0,0,0], v: null }; } catch { return { c: [0,0,0,0,0], v: null }; } }
-function sv(d) { try { localStorage.setItem(K, JSON.stringify(d)); } catch {} }
-function rn(d) {
-  const t = d.c.reduce((a, b) => a + b, 0);
-  for (let i = 0; i < 5; i++) {
-    const pct = t > 0 ? Math.round(d.c[i] / t * 100) : 0;
-    document.getElementById('b' + i).style.width = pct + '%';
-    document.getElementById('p' + i).textContent = t > 0 ? pct + '%' : '';
-    document.querySelectorAll('.f1-opt')[i].classList.toggle('sel', d.v === i);
-  }
-  document.getElementById('ftotal').textContent = t > 0 ? t + ' vote' + (t !== 1 ? 's' : '') + ' cast' : '';
+
+function ld() {
+  try { return JSON.parse(localStorage.getItem(K)) || { v: null }; }
+  catch { return { v: null }; }
 }
-function vote(i) { const d = ld(); if (d.v !== null) return; d.c[i]++; d.v = i; sv(d); rn(d); }
-rn(ld());
+function sv(d) { try { localStorage.setItem(K, JSON.stringify(d)); } catch {} }
+
+function rn(userVoteIdx) {
+  // Merge baseline + user's single vote (if any)
+  const counts = F1_BASE.slice();
+  if (userVoteIdx !== null) counts[userVoteIdx]++;
+  const total = counts.reduce((a, b) => a + b, 0);
+  const opts  = document.querySelectorAll('.f1-opt');
+  for (let i = 0; i < 5; i++) {
+    const pct = Math.round(counts[i] / total * 100);
+    document.getElementById('b' + i).style.width = pct + '%';
+    document.getElementById('p' + i).textContent  = pct + '%';
+    opts[i].classList.toggle('sel', userVoteIdx === i);
+  }
+}
+
+function vote(i) {
+  const d = ld();
+  if (d.v !== null) return; // already voted this browser
+  d.v = i;
+  sv(d);
+  rn(i);
+}
+
+rn(ld().v); // render on load — shows baseline (+ prior vote if any)
 </script>
 </body>
 </html>
